@@ -7,5 +7,6 @@ return {
 	require("custom.plugins.autopairs"),
 	require("custom.plugins.ntree"),
 	require("custom.plugins.barbar"),
-	require("custom.plugins.toggleterm")
+	require("custom.plugins.toggleterm"),
+	require("custom.plugins.neogit"),
 }
