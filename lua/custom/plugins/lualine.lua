@@ -5,7 +5,7 @@ return {
 	opts = {
 		options = {
 			icons_enabled = true,
-			theme = 'onedark',
+			theme = 'base16-black-metal',
 			section_separators = { left = '', right = '' },
 			component_separators = { left = '', right = '' },
 			disabled_filetypes = {}
