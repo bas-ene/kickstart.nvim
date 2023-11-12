@@ -9,4 +9,10 @@ return {
 	require("custom.plugins.barbar"),
 	require("custom.plugins.toggleterm"),
 	require("custom.plugins.neogit"),
+	require("custom.plugins.indent"),
+	require("custom.plugins.scroller"),
+	require("custom.plugins.autotag"),
+	require("custom.plugins.TODO"),
 }
+
+-- TODO frmf

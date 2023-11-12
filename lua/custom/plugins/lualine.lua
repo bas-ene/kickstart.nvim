@@ -34,7 +34,7 @@ return {
 					}
 				},
 				'encoding',
-				'filetype'
+				--'filetype'
 			},
 			--lualine_y = { 'progress' },
 			lualine_z = { 'location' }
