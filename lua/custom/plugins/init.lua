@@ -6,13 +6,13 @@ return {
 	require("custom.plugins.lualine"),
 	require("custom.plugins.autopairs"),
 	require("custom.plugins.ntree"),
-	require("custom.plugins.barbar"),
 	require("custom.plugins.toggleterm"),
 	require("custom.plugins.neogit"),
 	require("custom.plugins.indent"),
 	require("custom.plugins.scroller"),
 	require("custom.plugins.autotag"),
 	require("custom.plugins.TODO"),
+	require("custom.plugins.notify"),
 }
 
 -- TODO frmf
