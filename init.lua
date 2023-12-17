@@ -93,7 +93,6 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
-
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -198,7 +197,7 @@ require('lazy').setup({
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
   require 'kickstart.plugins.autoformat',
-  require 'kickstart.plugins.debug',
+  -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -249,6 +248,13 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+vim.notify = require("notify")
+vim.tabstop = 4
+vim.shiftwidth = 4
+vim.textwidth = 100
+vim.o.pumheight = 5
+vim.o.pumwidth = 1
 
 -- [[ Basic Keymaps ]]
 
@@ -578,7 +584,3 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
-vim.notify = require("notify")
-vim.tabstop = 4
-vim.shiftwidth = 4
-vim.textwidth = 100
