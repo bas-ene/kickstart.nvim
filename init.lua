@@ -73,7 +73,6 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -249,12 +248,21 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-vim.notify = require("notify")
-vim.tabstop = 4
-vim.shiftwidth = 4
-vim.textwidth = 100
-vim.o.pumheight = 5
-vim.o.pumwidth = 1
+
+-- Lua function to toggle between absolute and relative line numbers
+function toggle_line_numbers()
+  if vim.o.number == true and vim.o.relativenumber == true then
+    vim.api.nvim_exec([[
+            set norelativenumber
+        ]], false)
+  else
+    vim.api.nvim_exec([[
+            set relativenumber
+        ]], false)
+  end
+end
+
+vim.api.nvim_set_keymap('n', '<Leader>lt', '<cmd>lua toggle_line_numbers()<CR>', { noremap = true, silent = true })
 
 -- [[ Basic Keymaps ]]
 
@@ -495,7 +503,17 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 local servers = {
   clangd = {},
-  gopls = {},
+  gopls = {
+    filetypes = { 'go', 'gomod' },
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+      },
+    },
+  },
   pyright = {},
   rust_analyzer = {},
   tsserver = {},
@@ -547,6 +565,12 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
+  formatting = {
+    format = function(entry, vim_item)
+      vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
+      return vim_item
+    end,
+  },
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -582,5 +606,18 @@ cmp.setup {
   },
 }
 
+vim.g.copilot_assume_mapped = true
+vim.g.vimtex_view_method = 'zathura'
+vim.g.vimtex_compiler_method = 'latexrun'
+
+vim.notify = require("notify")
+vim.tabstop = 4
+vim.opt.tabstop = 4
+vim.shiftwidth = 4
+vim.opt.shiftwidth = 4
+vim.textwidth = 100
+vim.o.pumheight = 8
+vim.o.pumwidth = 80
+vim.o.relativenumber = true
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
