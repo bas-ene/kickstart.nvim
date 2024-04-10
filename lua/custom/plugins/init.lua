@@ -16,7 +16,9 @@ return {
 	require("custom.plugins.remaps.remap"),
 	require("custom.plugins.plugins.dap"),
 	require("custom.plugins.plugins.masondap"),
-	require("custom.plugins.plugins.vimtex"),
 	require("custom.plugins.plugins.vimbegood"),
 	require("custom.plugins.plugins.gonvim"),
+	require("custom.plugins.plugins.nvim-java"),
+	require("custom.plugins.plugins.multicursor"),
+	require("custom.plugins.plugins.dbod")
 }

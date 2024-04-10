@@ -12,4 +12,6 @@ return {
 	--save with Ctrl-s
 	vim.api.nvim_set_keymap('n', "<C-s>", ":wa<CR>", { noremap = true, silent = true }),
 	vim.api.nvim_set_keymap('i', "<C-s>", "<Esc>:wa<CR>gi", { noremap = true, silent = true }),
+	--DadBodUI
+	vim.api.nvim_set_keymap('n', '<leader>md', ':DBUIToggle<CR>', { noremap = true, silent = true }),
 }

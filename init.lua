@@ -2,6 +2,7 @@
 
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
+
 =====================================================================
 
 Kickstart.nvim is *not* a distribution.
@@ -86,7 +87,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      --{ 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -152,10 +153,23 @@ require('lazy').setup({
   {
     -- Theme inspired by Atom
     --'navarasu/onedark.nvim',
-    'metalelf0/base16-black-metal-scheme',
+    -- 'metalelf0/base16-black-metal-scheme',
+    'NLKNguyen/papercolor-theme',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'base16-black-metal'
+      -- NOTE: You should make sure your terminal supports this
+      vim.o.termguicolors = true
+      vim.cmd('colorscheme PaperColor')
+    end,
+  },
+
+  --VIMTEX
+  {
+    "lervag/vimtex",
+    ft = "tex",
+    config = function()
+      vim.g.vimtex_view_method = "zathura"
+      vim.g.vimtex_compiler_method = 'latexmk'
     end,
   },
 
@@ -207,12 +221,14 @@ require('lazy').setup({
   { import = 'custom.plugins' },
 }, {})
 
+
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
 -- Set highlight on search
-vim.o.hlsearch = true
+vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
@@ -223,8 +239,8 @@ vim.o.mouse = 'a'
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
-
+-- vim.o.clipboard = 'unnamedplus'
+vim.api.nvim_set_option('clipboard', 'unnamedplus')
 -- Enable break indent
 vim.o.breakindent = true
 
@@ -245,8 +261,6 @@ vim.o.timeoutlen = 300
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
--- NOTE: You should make sure your terminal supports this
-vim.o.termguicolors = true
 
 
 -- Lua function to toggle between absolute and relative line numbers
@@ -619,5 +633,8 @@ vim.textwidth = 100
 vim.o.pumheight = 8
 vim.o.pumwidth = 80
 vim.o.relativenumber = true
+--VIMTEX MAYBE
+vim.cmd("filetype plugin on")
+vim.cmd("filetype indent on")
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
