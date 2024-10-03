@@ -160,12 +160,13 @@ require('lazy').setup({
     -- Theme inspired by Atom
     --'navarasu/onedark.nvim',
     -- 'metalelf0/base16-black-metal-scheme',
-    'NLKNguyen/papercolor-theme',
+    -- 'NLKNguyen/papercolor-theme',
+    'afair/vibrantink2',
     priority = 1000,
     config = function()
       -- NOTE: You should make sure your terminal supports this
       vim.o.termguicolors = true
-      vim.cmd('colorscheme PaperColor')
+      vim.cmd('colorscheme vibrantink2')
     end,
   },
 
@@ -207,6 +208,10 @@ require('lazy').setup({
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
+      highlight = {
+        enable = true,                             -- enable Treesitter highlighting
+        additional_vim_regex_highlighting = false, -- Disable Vim's regex-based highlighting
+      },
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ':TSUpdate',
@@ -536,7 +541,6 @@ local servers = {
   },
   pyright = {},
   rust_analyzer = {},
-  tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
   lua_ls = {
     Lua = {
