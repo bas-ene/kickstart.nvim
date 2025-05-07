@@ -9,6 +9,7 @@
 return {
 	-- NOTE: Yes, you can install new plugins here!
 	'mfussenegger/nvim-dap',
+	event = 'VeryLazy',
 	-- NOTE: And you can specify dependencies as well
 	dependencies = {
 		-- Creates a beautiful debugger UI
@@ -20,6 +21,7 @@ return {
 
 		-- Add your own debuggers here
 		'leoluz/nvim-dap-go',
+		"nvim-neotest/nvim-nio"
 	},
 	config = function()
 		local dap = require 'dap'
@@ -29,6 +31,7 @@ return {
 			-- Makes a best effort to setup the various debuggers with
 			-- reasonable debug configurations
 			automatic_setup = true,
+			automatic_installation = true,
 
 			-- You can provide additional configuration to the handlers,
 			-- see mason-nvim-dap README for more information
@@ -38,7 +41,37 @@ return {
 			-- online, please don't ask me how to install them :)
 			ensure_installed = {
 				-- Update this to ensure that you have the debuggers for the langs you want
-				'delve', 'cpp', 'rust', 'java', 'c', 'go'
+				'delve', 'cpp', 'rust', 'java', 'c', 'go', 'lua'
+			},
+		}
+
+		dap.adapters["local-lua"] = {
+			type = "executable",
+			command = "local-lua-dbg",
+			enrich_config = function(config, on_config)
+				if not config["extensionPath"] then
+					local c = vim.deepcopy(config)
+					-- 💀 If this is missing or wrong you'll see
+					-- "module 'lldebugger' not found" errors in the dap-repl when trying to launch a debug session
+					c.extensionPath = "/usr/lib/node_modules/local-lua-debugger-vscode"
+					on_config(c)
+				else
+					on_config(config)
+				end
+			end,
+		}
+
+		dap.configurations.lua = {
+			{
+				name = 'Current file (local-lua-dbg, lua)',
+				type = 'local-lua',
+				request = 'launch',
+				cwd = '${workspaceFolder}',
+				program = {
+					lua = 'lua',
+					file = '${file}',
+				},
+				args = {},
 			},
 		}
 

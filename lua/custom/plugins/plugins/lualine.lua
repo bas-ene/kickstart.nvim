@@ -2,15 +2,15 @@ return {
 	-- Set lualine as statusline
 	'nvim-lualine/lualine.nvim',
 	-- See `:help lualine.txt`
+	event = 'VeryLazy',
 	opts = {
 		options = {
 			icons_enabled = true,
-			theme = 'codedark',
-			section_separators = { left = '', right = '' },
+			theme = '16color',
+			section_separators = { left = '🭀', right = '🭋' },
 			component_separators = { left = '', right = '' },
 			disabled_filetypes = {
-				--'neotree',
-				--'toggleterm'
+				'neotree',
 			},
 			globalstatus = true,
 		},
@@ -33,11 +33,10 @@ return {
 						hint = ' '
 					}
 				},
-				'encoding',
-				--'filetype'
 			},
-			--lualine_y = { 'progress' },
-			lualine_z = { 'location' }
+			lualine_z = {
+				'location'
+			}
 		},
 		--inactive_sections = {
 		--	lualine_a = {},
